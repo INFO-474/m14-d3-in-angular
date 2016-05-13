@@ -133,11 +133,11 @@ app.directive('barChart', function() {
 
         // Create a link function that allows dynamic element creation
 		link:function(scope,elem) {
-        // Instantiate your chart and specify parameters
-        var myChart = BarChart().color('blue');
-        var chart = d3.select(elem[0]) // select the DOM element
+            // Instantiate your chart and specify parameters
+            var myChart = BarChart().color('blue');
+            var chart = d3.select(elem[0]) // select the DOM element
 
-        // Watch for changes to scope.data: rebind the data and update the chart
+            // Watch for changes to scope.data: rebind the data and update the chart
   			scope.$watch('data', function() {
                 chart.datum(scope.data) // use the data from the scope
                .call(myChart); // call the chart function
