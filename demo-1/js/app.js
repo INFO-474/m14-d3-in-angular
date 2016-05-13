@@ -27,21 +27,24 @@ var myApp = angular.module('myApp', [])
     scope:false,
 		// Create a link function that allows dynamic element creation
 		link:function(scope,elem){
-			// Use the scope.$watch method to watch for changes to the step, then re-draw your chart
-			scope.$watch('data', function() {
-        console.log('data stuff!')
-        console.log(scope.data)
-        // Instantiate your chart with given settings
-        var myChart = BarChart().xVar('name')
-                                .yVar('concerts')
-                                .xAxisLabel('Name')
-                                .yAxisLabel('Concerts Attended');
+      // Define you chart function and chart element
+      var myChart = BarChart();
 
-  			// Wrapper element to put your svg (chart) in
-  			wrapper = d3.select(elem[0])
-          .datum(scope.data)
-          .call(myChart);
-			}, true);
+      // Wrapper element to put your chart in
+      var chart = d3.select(elem[0])
+
+      // Use the scope.$watch method to watch for changes to the step, then re-draw your chart
+			scope.$watch('data', function() {
+        // Instantiate your chart with given settings
+        myChart.xVar('name')
+               .yVar('concerts')
+               .xAxisLabel('Name')
+               .yAxisLabel('Concerts Attended');
+
+        // Bind data and call the chart function
+        chart.datum(scope.data)
+             .call(myChart);
+			}, true); // Watch for object consistency!
 		}
 	};
 });

@@ -106,17 +106,16 @@ app.directive('barChart', function() {
 	// Return your directive element
 	return {
 		restrict:'E', // this directive is specified as an html element <bar-chart>
-    scope:false, // use the same scope as the module
+        scope:false, // use the same scope as the module
 		// Create a link function that allows dynamic element creation
 		link:function(scope,elem) {
-        // Instantiate your chart and specify parameters
-        var myChart = BarChart().color('blue');
+            // Instantiate your chart and specify parameters
+            var myChart = BarChart().color('blue');
 
   			// Wrapper element to put your chart in
   			var chart = d3.select(elem[0]) // select the DOM element
-          .datum(scope.data) // use the data from the scope
-          .call(myChart);
-			});
+                          .datum(scope.data) // use the data from the scope
+                          .call(myChart);
 		}
 	};
 });
@@ -130,8 +129,9 @@ app.directive('barChart', function() {
 	// Return your directive element
 	return {
 		restrict:'E', // this directive is specified as an html element <bar-chart>
-    scope:false, // use the same scope as the module
-		// Create a link function that allows dynamic element creation
+        scope:false, // use the same scope as the module
+
+        // Create a link function that allows dynamic element creation
 		link:function(scope,elem) {
         // Instantiate your chart and specify parameters
         var myChart = BarChart().color('blue');
@@ -139,11 +139,10 @@ app.directive('barChart', function() {
 
         // Watch for changes to scope.data: rebind the data and update the chart
   			scope.$watch('data', function() {
-          chart.datum(scope.data) // use the data from the scope
+                chart.datum(scope.data) // use the data from the scope
                .call(myChart); // call the chart function
-        }, true) // check for object equality!  
-			});
-		}
+            }, true) // check for object equality!  
+		};
 	};
 });
 ```
@@ -153,7 +152,7 @@ It's easy to miss, but the `$watch` method takes in **three** parameters: an **e
 If you want to watch changes to multiple different pieces of data, you can use the `scope.$watchGroup`:
 
 ```javascript
-scope.$watch(['data', 'color', function() {
+scope.$watchGroup(['data', 'color'], function() {
   // Reset the color
   myChart.color(scope.color);
 

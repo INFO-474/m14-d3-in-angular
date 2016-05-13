@@ -13,7 +13,7 @@ var BarChart = function() {
   var margin = {
     left:70,
     bottom:50,
-    top:0,
+    top:10,
     right:50,
   };
 
